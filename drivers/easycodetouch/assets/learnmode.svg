@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com" viewBox="0 0 500 500">
+  <style type="text/css">
+    .blink {
+      animation: blink 4s infinite;
+    }
+    
+    @keyframes blink {
+      0%, 100% {
+        fill: transparent;
+      }
+      50% {
+        fill: rgb(170 17 15 / 75%);
+      }
+    }
+  </style>
+  <defs/>
+  <defs>
+    <clipPath id="clip-0">
+      <path fill="#d8d8d8" stroke="#000" d="M202.807 350.791h17.078V19.738H79.02v462.697h142.611v-70.454H202.11v-61.655z"/>
+    </clipPath>
+    <clipPath id="clip-1">
+      <path d="M1052.979 190.44a372.685 372.685 0 11-405.958 0L850 503z" transform="matrix(-.0268 -.0227 .02266 -.02686 854.564 633.957)" bx:origin="0.498792 0.5" bx:shape="pie 850 503 0 372.685 33 327 1@d480da93"/>
+    </clipPath>
+  </defs>
+  <path fill="none" stroke="#000" stroke-width="3" d="M89.834 80.163c.202-70.136 120.25-70.136 120.331 0v340.945c-.081 70.215-120.129 70.215-120.208 0l-.123-340.945z" clip-path="url(#clip-0)" pointer-events="none"/>
+  <path fill="none" stroke="#000" stroke-width="3" d="M140.034 350.992c-49.998-.047-49.998 60.115 0 60.185H400.13c50.05-.07 50.05-60.232 0-60.242l-260.096.057z" pointer-events="none"/>
+  <circle cx="150.116" cy="381.119" r="15.588" fill="none" stroke="#000" stroke-width="3" pointer-events="none"/>
+  <g>
+    <circle cx="150.848" cy="274.065" r="26.354" fill="none" stroke="#000" stroke-width="3"/>
+    <path class="blink" fill="none" stroke="#000" stroke-width="3" d="M198.5 231.028h-97V80.608c.011-55.373 96.974-55.581 96.986 0l.014 150.42z"/>
+    <path d="M833 601a10 9.999 0 1020 0 10 9.999 0 10-20 0zm3 0a7 6.999 0 0114 0 7 6.999 0 01-14 0z" clip-path="url(#clip-1)" transform="rotate(139.388 553.26 311.263) skewX(-.794)" bx:shape="ring 843 601 7 6.999 10 9.999 1@2c9dec92"/>
+    <path d="M149.624 261.493h3v9.659h-3z"/>
+  </g>
+</svg>

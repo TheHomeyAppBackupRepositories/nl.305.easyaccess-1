@@ -1,0 +1,13 @@
+{
+  "name": "nl.305.easyaccess",
+  "version": "1.0.0",
+  "main": "app.js",
+  "dependencies": {
+    "homey-log": "2.1.0",
+    "homey-zigbeedriver": "1.6.12",
+    "zigbee-clusters": "1.8.0"
+  },
+  "scripts": {
+    "validate": "homey app validate --level=verified"
+  }
+}
