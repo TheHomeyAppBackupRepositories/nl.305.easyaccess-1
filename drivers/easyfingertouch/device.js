@@ -2,7 +2,7 @@
 
 const EasyConnectLockDevice = require('../../lib/EasyConnectLockDevice');
 
-class EasyCodeTouch extends EasyConnectLockDevice {
+class EasyFingerTouch extends EasyConnectLockDevice {
 }
 
-module.exports = EasyCodeTouch;
+module.exports = EasyFingerTouch;

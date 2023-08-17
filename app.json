@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "nl.305.easyaccess",
-  "version": "2.2.0",
+  "version": "3.0.4",
   "compatibility": ">=7.4.0",
   "sdk": 3,
   "platforms": [
@@ -56,7 +56,7 @@
           {
             "name": "my_device",
             "type": "device",
-            "filter": "driver_id=easycodetouch"
+            "filter": "driver_id=easycodetouch|easyfingertouch|nimly_code|nimly_entrance|nimly_indoor|nimly_touch|nimly_touch_pro"
           }
         ],
         "tokens": [
@@ -102,7 +102,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=easycodetouch"
+            "filter": "driver_id=easycodetouch|easyfingertouch|nimly_code|nimly_entrance|nimly_indoor|nimly_touch|nimly_touch_pro"
           }
         ],
         "id": "auto_relock"
@@ -120,7 +120,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=easycodetouch"
+            "filter": "driver_id=easycodetouch|easyfingertouch|nimly_code|nimly_entrance|nimly_indoor|nimly_touch|nimly_touch_pro"
           },
           {
             "type": "checkbox",
@@ -133,7 +133,34 @@
         "id": "auto_relock"
       },
       {
-        "id": "set_pin",
+        "title": {
+          "en": "Delete PIN"
+        },
+        "titleFormatted": {
+          "en": "Delete PIN [[ID]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=easycodetouch|easyfingertouch|nimly_code|nimly_entrance|nimly_indoor|nimly_touch|nimly_touch_pro"
+          },
+          {
+            "name": "ID",
+            "type": "number",
+            "title": {
+              "en": "ID"
+            },
+            "placeholder": {
+              "en": "1-50"
+            },
+            "min": 1,
+            "max": 50
+          }
+        ],
+        "id": "delete_pin"
+      },
+      {
         "title": {
           "en": "Set PIN"
         },
@@ -142,9 +169,9 @@
         },
         "args": [
           {
-            "type": "device",
             "name": "device",
-            "filter": "driver_id=easycodetouch"
+            "type": "device",
+            "filter": "driver_id=easycodetouch|easyfingertouch|nimly_code|nimly_entrance|nimly_indoor|nimly_touch|nimly_touch_pro"
           },
           {
             "name": "pin",
@@ -168,35 +195,8 @@
             "min": 1,
             "max": 50
           }
-        ]
-      },
-      {
-        "id": "delete_pin",
-        "title": {
-          "en": "Delete PIN"
-        },
-        "titleFormatted": {
-          "en": "Delete PIN [[ID]]"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=easycodetouch"
-          },
-          {
-            "name": "ID",
-            "type": "number",
-            "title": {
-              "en": "ID"
-            },
-            "placeholder": {
-              "en": "1-50"
-            },
-            "min": 1,
-            "max": 50
-          }
-        ]
+        ],
+        "id": "set_pin"
       }
     ]
   },
@@ -222,24 +222,341 @@
         ]
       },
       "images": {
+        "xlarge": "/drivers/easycodetouch/assets/images/xlarge.png",
         "large": "/drivers/easycodetouch/assets/images/large.png",
         "small": "/drivers/easycodetouch/assets/images/small.png"
       },
       "icon": "/drivers/easycodetouch/assets/icon.svg",
       "name": {
-        "en": "Nimly / EasyAccess lock",
-        "nl": "Nimly / EasyAccess lock"
+        "en": "EasyCode Touch"
       },
       "zigbee": {
         "manufacturerName": "Onesti Products AS",
         "productId": [
           "easyCodeTouch_v1",
-          "EasyCodeTouch",
-          "EasyFingerTouch",
-          "NimlyIn",
-          "NimlyPRO",
-          "NimlyTouch",
-          "NimlyCode",
+          "EasyCodeTouch"
+        ],
+        "endpoints": {
+          "11": {
+            "clusters": [
+              1,
+              257
+            ],
+            "bindings": [
+              1,
+              257
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/easycodetouch/assets/learn.svg",
+          "instruction": {
+            "en": "Install the module and ensure that the inside and outside units are connected. Activate pairing mode by removing and reinserting the batteries into the lock. The module will automatically enter pairing mode for approximately four minutes, indicated by flashing LED indicators.\n\nIf this doesn't work, try resetting the module by holding down the reset button until the orange LED indicator starts blinking rapidly (after about 15 seconds). Release the button immediately."
+          }
+        }
+      },
+      "id": "easycodetouch",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "General settings"
+          },
+          "children": [
+            {
+              "id": "auto_relock_time",
+              "type": "checkbox",
+              "value": true,
+              "label": {
+                "en": "Auto relock",
+                "nl": "Automatisch opnieuw vergrendelen"
+              },
+              "hint": {
+                "en": "Automatically lock after a little while when the lock has been unlocked.",
+                "nl": "Na een bepaalde tijd het slot vergrendelen zodra het slot is ontgrendeld."
+              }
+            },
+            {
+              "id": "sound_volume",
+              "type": "dropdown",
+              "value": "normal",
+              "label": {
+                "en": "Sound volume",
+                "nl": "Geluid volume"
+              },
+              "values": [
+                {
+                  "id": "off",
+                  "label": {
+                    "en": "Off",
+                    "nl": "Uit"
+                  }
+                },
+                {
+                  "id": "low",
+                  "label": {
+                    "en": "Low",
+                    "nl": "Laag"
+                  }
+                },
+                {
+                  "id": "normal",
+                  "label": {
+                    "en": "Normal",
+                    "nl": "Normaal"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "class": "lock",
+      "capabilities": [
+        "locked",
+        "measure_battery"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "energy": {
+        "batteries": [
+          "AA",
+          "AA",
+          "AA"
+        ]
+      },
+      "images": {
+        "xlarge": "/drivers/easyfingertouch/assets/images/xlarge.png",
+        "large": "/drivers/easyfingertouch/assets/images/large.png",
+        "small": "/drivers/easyfingertouch/assets/images/small.png"
+      },
+      "icon": "/drivers/easyfingertouch/assets/icon.svg",
+      "name": {
+        "en": "EasyFinger Touch"
+      },
+      "zigbee": {
+        "manufacturerName": "Onesti Products AS",
+        "productId": [
+          "EasyFingerTouch"
+        ],
+        "endpoints": {
+          "11": {
+            "clusters": [
+              1,
+              257
+            ],
+            "bindings": [
+              1,
+              257
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/easyfingertouch/assets/learn.svg",
+          "instruction": {
+            "en": "Install the module and ensure that the inside and outside units are connected. Activate pairing mode by removing and reinserting the batteries into the lock. The module will automatically enter pairing mode for approximately four minutes, indicated by flashing LED indicators.\n\nIf this doesn't work, try resetting the module by holding down the reset button until the orange LED indicator starts blinking rapidly (after about 15 seconds). Release the button immediately."
+          }
+        }
+      },
+      "id": "easyfingertouch",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "General settings"
+          },
+          "children": [
+            {
+              "id": "auto_relock_time",
+              "type": "checkbox",
+              "value": true,
+              "label": {
+                "en": "Auto relock",
+                "nl": "Automatisch opnieuw vergrendelen"
+              },
+              "hint": {
+                "en": "Automatically lock after a little while when the lock has been unlocked.",
+                "nl": "Na een bepaalde tijd het slot vergrendelen zodra het slot is ontgrendeld."
+              }
+            },
+            {
+              "id": "sound_volume",
+              "type": "dropdown",
+              "value": "normal",
+              "label": {
+                "en": "Sound volume",
+                "nl": "Geluid volume"
+              },
+              "values": [
+                {
+                  "id": "off",
+                  "label": {
+                    "en": "Off",
+                    "nl": "Uit"
+                  }
+                },
+                {
+                  "id": "low",
+                  "label": {
+                    "en": "Low",
+                    "nl": "Laag"
+                  }
+                },
+                {
+                  "id": "normal",
+                  "label": {
+                    "en": "Normal",
+                    "nl": "Normaal"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "class": "lock",
+      "capabilities": [
+        "locked",
+        "measure_battery"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "energy": {
+        "batteries": [
+          "AA",
+          "AA",
+          "AA"
+        ]
+      },
+      "images": {
+        "xlarge": "/drivers/nimly_code/assets/images/xlarge.png",
+        "large": "/drivers/nimly_code/assets/images/large.png",
+        "small": "/drivers/nimly_code/assets/images/small.png"
+      },
+      "icon": "/drivers/nimly_code/assets/icon.svg",
+      "name": {
+        "en": "Nimly Code"
+      },
+      "zigbee": {
+        "manufacturerName": "Onesti Products AS",
+        "productId": [
+          "NimlyCode"
+        ],
+        "endpoints": {
+          "11": {
+            "clusters": [
+              1,
+              257
+            ],
+            "bindings": [
+              1,
+              257
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/nimly_code/assets/learn.svg",
+          "instruction": {
+            "en": "Install the module and ensure that the inside and outside units are connected. Activate pairing mode by removing and reinserting the batteries into the lock. The module will automatically enter pairing mode for approximately four minutes, indicated by flashing LED indicators.\n\nIf this doesn't work, try resetting the module by holding down the reset button until the orange LED indicator starts blinking rapidly (after about 15 seconds). Release the button immediately."
+          }
+        }
+      },
+      "id": "nimly_code",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "General settings"
+          },
+          "children": [
+            {
+              "id": "auto_relock_time",
+              "type": "checkbox",
+              "value": true,
+              "label": {
+                "en": "Auto relock",
+                "nl": "Automatisch opnieuw vergrendelen"
+              },
+              "hint": {
+                "en": "Automatically lock after a little while when the lock has been unlocked.",
+                "nl": "Na een bepaalde tijd het slot vergrendelen zodra het slot is ontgrendeld."
+              }
+            },
+            {
+              "id": "sound_volume",
+              "type": "dropdown",
+              "value": "normal",
+              "label": {
+                "en": "Sound volume",
+                "nl": "Geluid volume"
+              },
+              "values": [
+                {
+                  "id": "off",
+                  "label": {
+                    "en": "Off",
+                    "nl": "Uit"
+                  }
+                },
+                {
+                  "id": "low",
+                  "label": {
+                    "en": "Low",
+                    "nl": "Laag"
+                  }
+                },
+                {
+                  "id": "normal",
+                  "label": {
+                    "en": "Normal",
+                    "nl": "Normaal"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "class": "lock",
+      "capabilities": [
+        "locked"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "energy": {},
+      "images": {
+        "xlarge": "/drivers/nimly_entrance/assets/images/xlarge.png",
+        "large": "/drivers/nimly_entrance/assets/images/large.png",
+        "small": "/drivers/nimly_entrance/assets/images/small.png"
+      },
+      "icon": "/drivers/nimly_entrance/assets/icon.svg",
+      "name": {
+        "en": "Nimly Entrance"
+      },
+      "zigbee": {
+        "manufacturerName": "Onesti Products AS",
+        "productId": [
           "NimlyShared"
         ],
         "endpoints": {
@@ -255,14 +572,343 @@
           }
         },
         "learnmode": {
-          "image": "/drivers/easycodetouch/assets/learnmode.svg",
+          "image": "/drivers/nimly_entrance/assets/icon.svg",
           "instruction": {
-            "en": "Put the lock in pairing mode by removing and inserting the batteries.\n\nIf this doesn't work, try resetting the ZigBee module by holding down the button until you get rapid yellow blinking (after about 15-20 seconds).",
-            "nl": "Zet het slot in pairing modus door de batterijen opnieuw te plaatsen.\n\nIndien dit niet werk kan de ZigBee module gereset worden door de knop in te drukken tot het moment dat de LED snel geel gaat knipperen (duurt ongeveer 15-20 seconden)."
+            "en": "Install the module and ensure that the inside and outside units are connected. Activate pairing mode by disconnecting and reconnecting the power supply. The module will automatically enter pairing mode for approximately four minutes, indicated by flashing LED indicators.\n\nIf this doesn't work, try resetting the module by holding down the reset button until the orange LED indicator starts blinking rapidly (after about 15 seconds). Release the button immediately.\n"
           }
         }
       },
-      "id": "easycodetouch",
+      "id": "nimly_entrance",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "General settings"
+          },
+          "children": [
+            {
+              "id": "auto_relock_time",
+              "type": "checkbox",
+              "value": true,
+              "label": {
+                "en": "Auto relock",
+                "nl": "Automatisch opnieuw vergrendelen"
+              },
+              "hint": {
+                "en": "Automatically lock after a little while when the lock has been unlocked.",
+                "nl": "Na een bepaalde tijd het slot vergrendelen zodra het slot is ontgrendeld."
+              }
+            },
+            {
+              "id": "sound_volume",
+              "type": "dropdown",
+              "value": "normal",
+              "label": {
+                "en": "Sound volume",
+                "nl": "Geluid volume"
+              },
+              "values": [
+                {
+                  "id": "off",
+                  "label": {
+                    "en": "Off",
+                    "nl": "Uit"
+                  }
+                },
+                {
+                  "id": "low",
+                  "label": {
+                    "en": "Low",
+                    "nl": "Laag"
+                  }
+                },
+                {
+                  "id": "normal",
+                  "label": {
+                    "en": "Normal",
+                    "nl": "Normaal"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "class": "lock",
+      "capabilities": [
+        "locked",
+        "measure_battery"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "energy": {
+        "batteries": [
+          "AA",
+          "AA",
+          "AA"
+        ]
+      },
+      "images": {
+        "xlarge": "/drivers/nimly_indoor/assets/images/xlarge.png",
+        "large": "/drivers/nimly_indoor/assets/images/large.png",
+        "small": "/drivers/nimly_indoor/assets/images/small.png"
+      },
+      "icon": "/drivers/nimly_indoor/assets/icon.svg",
+      "name": {
+        "en": "Nimly Indoor"
+      },
+      "zigbee": {
+        "manufacturerName": "Onesti Products AS",
+        "productId": [
+          "NimlyIn"
+        ],
+        "endpoints": {
+          "11": {
+            "clusters": [
+              1,
+              257
+            ],
+            "bindings": [
+              1,
+              257
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/nimly_indoor/assets/learn.svg",
+          "instruction": {
+            "en": "Install the module and ensure that the inside and outside units are connected. Activate pairing mode by removing and reinserting the batteries into the lock. The module will automatically enter pairing mode for approximately four minutes, indicated by flashing LED indicators.\n\nIf this doesn't work, try resetting the module by holding down the reset button until the orange LED indicator starts blinking rapidly (after about 15 seconds). Release the button immediately."
+          }
+        }
+      },
+      "id": "nimly_indoor",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "General settings"
+          },
+          "children": [
+            {
+              "id": "auto_relock_time",
+              "type": "checkbox",
+              "value": true,
+              "label": {
+                "en": "Auto relock",
+                "nl": "Automatisch opnieuw vergrendelen"
+              },
+              "hint": {
+                "en": "Automatically lock after a little while when the lock has been unlocked.",
+                "nl": "Na een bepaalde tijd het slot vergrendelen zodra het slot is ontgrendeld."
+              }
+            },
+            {
+              "id": "sound_volume",
+              "type": "dropdown",
+              "value": "normal",
+              "label": {
+                "en": "Sound volume",
+                "nl": "Geluid volume"
+              },
+              "values": [
+                {
+                  "id": "off",
+                  "label": {
+                    "en": "Off",
+                    "nl": "Uit"
+                  }
+                },
+                {
+                  "id": "low",
+                  "label": {
+                    "en": "Low",
+                    "nl": "Laag"
+                  }
+                },
+                {
+                  "id": "normal",
+                  "label": {
+                    "en": "Normal",
+                    "nl": "Normaal"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "class": "lock",
+      "capabilities": [
+        "locked",
+        "measure_battery"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "energy": {
+        "batteries": [
+          "AA",
+          "AA",
+          "AA"
+        ]
+      },
+      "images": {
+        "xlarge": "/drivers/nimly_touch/assets/images/xlarge.png",
+        "large": "/drivers/nimly_touch/assets/images/large.png",
+        "small": "/drivers/nimly_touch/assets/images/small.png"
+      },
+      "icon": "/drivers/nimly_touch/assets/icon.svg",
+      "name": {
+        "en": "Nimly Touch"
+      },
+      "zigbee": {
+        "manufacturerName": "Onesti Products AS",
+        "productId": [
+          "NimlyTouch"
+        ],
+        "endpoints": {
+          "11": {
+            "clusters": [
+              1,
+              257
+            ],
+            "bindings": [
+              1,
+              257
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/nimly_touch/assets/learn.svg",
+          "instruction": {
+            "en": "Install the module and ensure that the inside and outside units are connected. Activate pairing mode by removing and reinserting the batteries into the lock. The module will automatically enter pairing mode for approximately four minutes, indicated by flashing LED indicators.\n\nIf this doesn't work, try resetting the module by holding down the reset button until the orange LED indicator starts blinking rapidly (after about 15 seconds). Release the button immediately."
+          }
+        }
+      },
+      "id": "nimly_touch",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "General settings"
+          },
+          "children": [
+            {
+              "id": "auto_relock_time",
+              "type": "checkbox",
+              "value": true,
+              "label": {
+                "en": "Auto relock",
+                "nl": "Automatisch opnieuw vergrendelen"
+              },
+              "hint": {
+                "en": "Automatically lock after a little while when the lock has been unlocked.",
+                "nl": "Na een bepaalde tijd het slot vergrendelen zodra het slot is ontgrendeld."
+              }
+            },
+            {
+              "id": "sound_volume",
+              "type": "dropdown",
+              "value": "normal",
+              "label": {
+                "en": "Sound volume",
+                "nl": "Geluid volume"
+              },
+              "values": [
+                {
+                  "id": "off",
+                  "label": {
+                    "en": "Off",
+                    "nl": "Uit"
+                  }
+                },
+                {
+                  "id": "low",
+                  "label": {
+                    "en": "Low",
+                    "nl": "Laag"
+                  }
+                },
+                {
+                  "id": "normal",
+                  "label": {
+                    "en": "Normal",
+                    "nl": "Normaal"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "class": "lock",
+      "capabilities": [
+        "locked",
+        "measure_battery"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "energy": {
+        "batteries": [
+          "AA",
+          "AA",
+          "AA"
+        ]
+      },
+      "images": {
+        "xlarge": "/drivers/nimly_touch_pro/assets/images/xlarge.png",
+        "large": "/drivers/nimly_touch_pro/assets/images/large.png",
+        "small": "/drivers/nimly_touch_pro/assets/images/small.png"
+      },
+      "icon": "/drivers/nimly_touch_pro/assets/icon.svg",
+      "name": {
+        "en": "Nimly Touch Pro"
+      },
+      "zigbee": {
+        "manufacturerName": "Onesti Products AS",
+        "productId": [
+          "NimlyPRO"
+        ],
+        "endpoints": {
+          "11": {
+            "clusters": [
+              1,
+              257
+            ],
+            "bindings": [
+              1,
+              257
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/nimly_touch_pro/assets/learn.svg",
+          "instruction": {
+            "en": "Install the module and ensure that the inside and outside units are connected. Activate pairing mode by removing and reinserting the batteries into the lock. The module will automatically enter pairing mode for approximately four minutes, indicated by flashing LED indicators.\n\nIf this doesn't work, try resetting the module by holding down the reset button until the orange LED indicator starts blinking rapidly (after about 15 seconds). Release the button immediately."
+          }
+        }
+      },
+      "id": "nimly_touch_pro",
       "settings": [
         {
           "type": "group",

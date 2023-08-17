@@ -2,7 +2,7 @@
 
 const EasyConnectLockDevice = require('../../lib/EasyConnectLockDevice');
 
-class EasyCodeTouch extends EasyConnectLockDevice {
+class NimlyIndoor extends EasyConnectLockDevice {
 }
 
-module.exports = EasyCodeTouch;
+module.exports = NimlyIndoor;

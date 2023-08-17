@@ -1,5 +1,7 @@
-Nimly AS is an innovative Norwegian company, a leader in biometric and electronic locking and security systems. We focus on design and quality. Our products are developed and designed especially for Scandinavian conditions and climate. The market's simplest assembly, supplementary assembly instructions / video and good price, means that our products are well received in the Nordic market.
+We are convinced that smart homes start at the front door. Unlock the potential of your home with Homey and let nimly work seamlessly with all your smart home devices. Activate flows by locking or unlocking your nimly lock, creating endless possibilities for smart scenery.
 
-In addition, we want to be the best at customer service and support. The Nimly team is here to help.
+For example, upon your arrival home, imagine your favorite tune filling the house on the stereo, accompanied by the automatic illumination of lights as you walk in. Simultaneously, the living room curtains gracefully part, revealing a splendid view, while the air conditioning adjusts itself to your desired comfort. Enjoy!
 
-The Nimly / EasyAccess locks are stylish door locks with a touch display and RFID key fobs (depends on the exact model). The modern look, the simplest installation on the market, minimalist design and emergency key function make this a safe choice. It is of course CE approved and fulfils general insurance requirements.
+What do we offer? Better homecomings for you and your family. Our products are developed for the Nordic climate and Scandinavian door standards. Easy DIY installation. Elevate your entrance by adding both style and tech to your door, featuring an elegant and modern design.
+
+Find the model best suited for your needs and unlock your home with your fingerprint, personal code, key tag, or emergency key, adding both security and comfort to your home.
